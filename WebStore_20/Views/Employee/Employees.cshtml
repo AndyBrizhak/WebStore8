@@ -1,0 +1,31 @@
+﻿@model IEnumerable<EmployeeViewModel>
+
+@{
+    var isAdmin = User.IsInRole("Admins");
+
+}
+@if (isAdmin)
+{
+    <a asp-action="Edit" class="btn btn-success">Добавить</a>
+}
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (isAdmin)
+            {
+                <td><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></td>
+            }
+            <td>@item.FirstName</td>
+            <td>@item.SurName</td>
+            <td>@item.Patronymic</td>
+            <td><a asp-action="EmployeeDetails" asp-route-id="@item.Id">Детали</a></td>
+
+            @if (isAdmin)
+            {
+                <td><a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-cut"></i></a></td>
+            }
+        </tr>
+    }
+</table>
