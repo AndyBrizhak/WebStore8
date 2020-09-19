@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain;
+using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Services;
 using WebStore.ViewModels;
 
 namespace WebStore.Controllers
@@ -13,11 +15,13 @@ namespace WebStore.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IOrdersService _ordersService;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IOrdersService ordersService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _ordersService = ordersService;
         }
 
         [HttpGet]
@@ -84,6 +88,16 @@ namespace WebStore.Controllers
 
             await _userManager.AddToRoleAsync(user, "Users"); 
             await _signInManager.SignInAsync(user, false);//если успешно - логинимся
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult UserOrders()
+        {
+            if (User.Identity != null)
+            {
+                var _orders = _ordersService.GetUserOrders(User.Identity.Name);
+                return View(_orders);
+            }
             return RedirectToAction("Index", "Home");
         }
 
