@@ -66,6 +66,10 @@
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a asp-controller="Home" asp-action="Checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a asp-controller="Cart" asp-action="Details"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            @if (User.Identity != null)
+                            {
+                                <li><a asp-controller="Account" asp-action="UserOrders"><i class="fa fa-bookmark-o"></i> List Orders</a></li>
+                            }
                         </ul>
                     </div>
                 </div>
