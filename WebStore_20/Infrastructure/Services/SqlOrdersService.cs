@@ -23,6 +23,11 @@ namespace WebStore.Infrastructure.Services
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Get list Orders for User
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public IEnumerable<Order> GetUserOrders(string userName)
         {
             return _context.Orders
