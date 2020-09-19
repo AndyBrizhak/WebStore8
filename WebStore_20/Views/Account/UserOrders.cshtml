@@ -1,17 +1,11 @@
 ﻿@model IEnumerable<WebStore.Domain.Entities.Order>
 
 @{
-    Layout = null;
+    ViewData["Title"] = "UserOrders";
 }
 
-<!DOCTYPE html>
+<h2>UserOrders</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>UserOrders</title>
-</head>
-<body>
 <p>
     @*<a asp-action="Create">Create New</a>*@
 </p>
@@ -57,5 +51,3 @@
 }
     </tbody>
 </table>
-</body>
-</html>
